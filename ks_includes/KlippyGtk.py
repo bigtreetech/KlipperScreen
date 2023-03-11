@@ -164,6 +164,7 @@ class KlippyGtk:
         if style is not None:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
+        b.connect("pressed", self.screen._button_pressed_feedback)
         return b
 
     def Dialog(self, screen, buttons, content, callback=None, *args):
@@ -176,6 +177,7 @@ class KlippyGtk:
         for button in buttons:
             dialog.add_button(button['name'], button['response'])
             button = dialog.get_widget_for_response(button['response'])
+            button.connect("pressed", self.screen._button_pressed_feedback)
             button.set_size_request((screen.width - 30) / 3, screen.height / 5)
             format_label(button, 3)
 
@@ -228,6 +230,7 @@ class KlippyGtk:
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
+        b.connect("pressed", self.screen._button_pressed_feedback)
         return b
 
     @staticmethod
