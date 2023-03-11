@@ -414,6 +414,7 @@ class KlipperScreen(Gtk.Window):
                 widget.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                 widget.set_max_width_chars(40)
         msg.connect("clicked", self.close_popup_message)
+        msg.connect("pressed", self._button_pressed_feedback)
         msg.get_style_context().add_class("message_popup")
         if level == 1:
             msg.get_style_context().add_class("message_popup_echo")
@@ -573,6 +574,9 @@ class KlipperScreen(Gtk.Window):
     def reload_icon_theme(self):
         self.panels_reinit = list(self.panels)
         self.base_panel.reload_icons()
+
+    def _button_pressed_feedback(self, widget=None):
+        os.system('/etc/scripts/ks_click.sh')
 
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
