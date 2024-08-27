@@ -576,6 +576,7 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.reload_icons()
 
     def _button_pressed_feedback(self, widget=None):
+        os.system('/boot/scripts/ks_click.sh')
         os.system('/etc/scripts/ks_click.sh')
 
     def _go_to_submenu(self, widget, name):
